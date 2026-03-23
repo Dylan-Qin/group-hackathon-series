@@ -1,6 +1,6 @@
 # DSL Hackathon Series
 
-A multi-format hackathon program by [DSL (Data Science Lab)](https://www.bigdatamining.cn/), designed to help students master modern AI tools, build real products, and turn ideas into prototypes.
+A multi-format hackathon program by [DSL (Data Intelligence for Scientific Innovation Lab)](https://www.bigdatamining.cn/), designed to help students master modern AI tools, build real products, and turn ideas into prototypes.
 
 ## Current Edition
 
@@ -40,7 +40,3 @@ group-hackathon-series/
 - [SciMatrix](https://www.scimatrix.cn/)
 - [NanoAgent Team](https://nanoagentteam.github.io/)
 
-## Contact
-
-- Lab: [dsl@cnic.cn](mailto:dsl@cnic.cn)
-- Organizer: [chuanqin0426@gmail.com](mailto:chuanqin0426@gmail.com)
