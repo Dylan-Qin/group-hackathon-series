@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSL Hackathon Series</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Pixel Arrow Cursor -->
+  <div class="cursor-pixel" id="cursorPixel">
+    <svg viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+      <!-- Classic arrow cursor — gold pixel style, tip at (1,0) -->
+      <rect x="1" y="0" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="1" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="1" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="2" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="2" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="2" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="3" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="3" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="3" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="3" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="4" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="4" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="4" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="4" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="5" y="4" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="5" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="5" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="5" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="5" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="5" y="5" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="6" y="5" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="6" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="6" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="6" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="6" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="5" y="6" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="6" y="6" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="7" y="6" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="7" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="7" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="7" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="7" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="5" y="7" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="6" y="7" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="7" y="7" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="8" y="7" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="8" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="8" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="8" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="8" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="5" y="8" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="6" y="8" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="7" y="8" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="8" y="8" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="9" y="8" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="9" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="9" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="9" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="9" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="5" y="9" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="6" y="9" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="7" y="9" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="8" y="9" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="9" y="9" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="10" y="9" width="1" height="1" fill="#C0AE7F"/>
+      <!-- Bottom of arrow body — collapses back -->
+      <rect x="1" y="10" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="10" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="10" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="10" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="5" y="10" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="6" y="10" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="7" y="10" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="8" y="10" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="9" y="10" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="10" y="10" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="11" y="10" width="1" height="1" fill="#C0AE7F"/>
+      <!-- Tail shaft -->
+      <rect x="1" y="11" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="11" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="3" y="11" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="11" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="12" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="12" width="1" height="1" fill="#d4c79e"/>
+      <rect x="3" y="12" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="12" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="13" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="13" width="1" height="1" fill="#d4c79e"/>
+      <rect x="3" y="13" width="1" height="1" fill="#e8d9a0"/>
+      <rect x="4" y="13" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="14" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="14" width="1" height="1" fill="#d4c79e"/>
+      <rect x="3" y="14" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="15" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="2" y="15" width="1" height="1" fill="#C0AE7F"/>
+      <rect x="1" y="16" width="1" height="1" fill="#C0AE7F"/>
+    </svg>
+  </div>
+  <!-- Cursor ring follower -->
+  <div class="cursor-follower" id="cursorFollower"></div>
+  <!-- Cursor trail dots -->
+  <div id="cursorTrailContainer"></div>
+
+  <!-- Navigation -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <a href="https://www.bigdatamining.cn/" target="_blank" rel="noopener" class="nav__logo">
+        <span class="nav__logo-text">DSL</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#current" class="nav__link">Current</a></li>
+        <li><a href="#editions" class="nav__link">Editions</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+      </ul>
+      <button class="nav__menu-btn" id="menuBtn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__links">
+      <li><a href="#about" class="mobile-menu__link">About</a></li>
+      <li><a href="#current" class="mobile-menu__link">Current</a></li>
+      <li><a href="#editions" class="mobile-menu__link">Editions</a></li>
+      <li><a href="#contact" class="mobile-menu__link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+    <div class="hero__content">
+      <a href="https://dylan-qin.github.io/" target="_blank" rel="noopener" class="hero__label reveal-up">An initiative by Dr. Chuan Qin</a>
+      <h1 class="hero__title">
+        <span class="reveal-up" style="--delay: 0.1s">DSL</span>
+        <span class="reveal-up hero__title--outline" style="--delay: 0.2s">Hackathon</span>
+        <span class="reveal-up" style="--delay: 0.3s">Series</span>
+      </h1>
+      <p class="hero__subtitle reveal-up" style="--delay: 0.5s">
+        Where innovation meets collaboration. Building the future of AI research, one hackathon at a time.
+      </p>
+      <a href="#current" class="hero__cta reveal-up" style="--delay: 0.7s">
+        <span>Explore Current Edition</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero__scroll-indicator">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__label reveal-up">What is DSL Hackathon Series</span>
+        <h2 class="section__title reveal-up" style="--delay: 0.1s">
+          Build <em>Fast.</em> Learn <em>Deep.</em> Ship <em>Real.</em>
+        </h2>
+        <p class="section__desc reveal-up" style="--delay: 0.15s">
+          A multi-format hackathon program designed to help students master modern AI tools, build real products, and turn ideas into prototypes — from <em>24-hour</em> sprints to <em>4-week</em> innovation cycles.
+        </p>
+      </div>
+      <div class="about__grid">
+        <div class="about__card reveal-up" style="--delay: 0.2s">
+          <div class="about__card-number">01</div>
+          <h3 class="about__card-title">Build with AI</h3>
+          <p class="about__card-text">Learn and apply cutting-edge tools like Claude Code, AI-assisted development workflows, and emerging research tools to rapidly turn ideas into working prototypes.</p>
+        </div>
+        <div class="about__card reveal-up" style="--delay: 0.3s">
+          <div class="about__card-number">02</div>
+          <h3 class="about__card-title">Solve Real Problems</h3>
+          <p class="about__card-text">Work on meaningful challenges — from research ideas to product concepts — and develop solutions that go beyond demos.</p>
+        </div>
+        <div class="about__card reveal-up" style="--delay: 0.4s">
+          <div class="about__card-number">03</div>
+          <h3 class="about__card-title">Learn by Shipping</h3>
+          <p class="about__card-text">Move beyond theory. Gain hands-on experience in coding, prototyping, iteration, and deployment through real project cycles.</p>
+        </div>
+        <div class="about__card reveal-up" style="--delay: 0.5s">
+          <div class="about__card-number">04</div>
+          <h3 class="about__card-title">Grow as a Team</h3>
+          <p class="about__card-text">Collaborate in fast-paced environments, practice communication, and experience what it's like to build as a real startup team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current Hackathon Section -->
+  <section class="section current" id="current">
+    <div class="container">
+      <div class="current__layout">
+        <div class="current__info">
+          <span class="section__label reveal-up">Current Edition</span>
+          <h2 class="current__title reveal-up" style="--delay: 0.1s">
+            DSL Hackathon <span class="text-gold">#1</span> (April 2026)
+          </h2>
+          <p class="current__desc reveal-up" style="--delay: 0.2s">
+            The inaugural DSL Hackathon will be held within the research group, focusing on how to leverage generative AI tools—such as Claude Code, NotebookLM, Nano Banana, OpenClaw, and Agent Skills—to enhance research efficiency and productivity. Participants may join individually or form teams of up to three members.
+          </p>
+          <div class="current__details reveal-up" style="--delay: 0.3s">
+            <div class="current__detail">
+              <span class="current__detail-label">Date</span>
+              <span class="current__detail-value">April 06 — 19, 2026</span>
+            </div>
+            <div class="current__detail">
+              <span class="current__detail-label">Location</span>
+              <span class="current__detail-value">DSL 511</span>
+            </div>
+            <div class="current__detail">
+              <span class="current__detail-label">Theme</span>
+              <span class="current__detail-value">Enhancing Research Efficiency with Generative AI</span>
+            </div>
+            <div class="current__detail">
+              <span class="current__detail-label">Participants</span>
+              <span class="current__detail-value">DSL Members</span>
+            </div>
+          </div>
+          <a href="#" class="btn reveal-up" style="--delay: 0.4s">
+            <!-- <span>Register Now</span> -->
+             <span>Comming Soon</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="current__visual reveal-up" style="--delay: 0.3s">
+          <div class="current__visual-inner">
+            <div class="current__visual-grid">
+              <div class="current__visual-cell" style="--i:0"></div>
+              <div class="current__visual-cell" style="--i:1"></div>
+              <div class="current__visual-cell" style="--i:2"></div>
+              <div class="current__visual-cell" style="--i:3"></div>
+              <div class="current__visual-cell" style="--i:4"></div>
+              <div class="current__visual-cell" style="--i:5"></div>
+              <div class="current__visual-cell" style="--i:6"></div>
+              <div class="current__visual-cell" style="--i:7"></div>
+              <div class="current__visual-cell" style="--i:8"></div>
+            </div>
+            <div class="current__visual-overlay">
+              <span class="current__visual-year">2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee Section -->
+  <section class="marquee">
+    <div class="marquee__track">
+      <div class="marquee__content">
+        <span>Data Science</span>
+        <span class="marquee__dot"></span>
+        <span>Machine Learning</span>
+        <span class="marquee__dot"></span>
+        <span>Deep Learning</span>
+        <span class="marquee__dot"></span>
+        <span>Natural Language Processing</span>
+        <span class="marquee__dot"></span>
+        <span>Computer Vision</span>
+        <span class="marquee__dot"></span>
+        <span>AI Ethics</span>
+        <span class="marquee__dot"></span>
+        <span>Claude Code</span>
+        <span class="marquee__dot"></span>
+        <span>OpenAI Codex</span>
+        <span class="marquee__dot"></span>
+        <span>Multi-Agent Systems</span>
+        <span class="marquee__dot"></span>
+        <span>OpenClaw</span>
+        <span class="marquee__dot"></span>
+        <span>Large Foundation Model</span>
+        <span class="marquee__dot"></span>
+        <span>Embodied AI</span>
+        <span class="marquee__dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editions Section -->
+  <section class="section editions" id="editions">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__label reveal-up">Archive</span>
+        <h2 class="section__title reveal-up" style="--delay: 0.1s">
+          All <em>Editions</em>
+        </h2>
+      </div>
+      <div class="editions__list">
+        <a href="#" class="edition-card reveal-up" style="--delay: 0.15s" data-year="2026">
+          <div class="edition-card__left">
+            <span class="edition-card__number">01</span>
+            <h3 class="edition-card__title">DSL Hackathon #1 (April 2026)</h3>
+            <span class="edition-card__theme">Generative AI for Research</span>
+          </div>
+          <div class="edition-card__right">
+            <span class="edition-card__date">Apr 2026</span>
+            <div class="edition-card__arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section
+  <section class="section stats">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stats__item reveal-up" style="--delay: 0.1s">
+          <span class="stats__number" data-target="6">0</span>
+          <span class="stats__label">Editions</span>
+        </div>
+        <div class="stats__item reveal-up" style="--delay: 0.2s">
+          <span class="stats__number" data-target="850">0</span>
+          <span class="stats__suffix">+</span>
+          <span class="stats__label">Participants</span>
+        </div>
+        <div class="stats__item reveal-up" style="--delay: 0.3s">
+          <span class="stats__number" data-target="120">0</span>
+          <span class="stats__suffix">+</span>
+          <span class="stats__label">Projects Built</span>
+        </div>
+        <div class="stats__item reveal-up" style="--delay: 0.4s">
+          <span class="stats__number" data-target="50">0</span>
+          <span class="stats__suffix">+</span>
+          <span class="stats__label">Mentors</span>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Contact / CTA Section -->
+  <section class="section cta" id="contact">
+    <div class="container">
+      <div class="cta__inner reveal-up">
+        <h2 class="cta__title">Ready to build <br><em>something extraordinary?</em></h2>
+        <p class="cta__text">Join our lab, research group, or participate in our next hackathon that transforms ideas into reality.</p>
+        <div class="cta__actions">
+          <a href="mailto:dsl@cnic.cn" class="btn btn--primary">
+            <span>Join Us</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="mailto:chuanqin0426@gmail.com" class="btn btn--outline">
+            <span>Learn More</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <!-- <a href="https://www.bigdatamining.cn/" class="footer__logo"> -->
+            <span class="nav__logo-text">DSL Hackathon Series</span>
+          <!-- </a> -->
+          <p class="footer__tagline">Building the future of AI research, one hackathon at a time.</p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4 class="footer__col-title">Navigate</h4>
+            <a href="#about">About</a>
+            <a href="#current">Current</a>
+            <a href="#editions">Editions</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title">Links</h4>
+            <a href="https://www.bigdatamining.cn/" target="_blank" rel="noopener">CNIC DSL</a>
+            <a href="https://www.scihorizon.cn/" target="_blank" rel="noopener">SciHorizon</a>
+            <a href="https://www.scimatrix.cn/" target="_blank" rel="noopener">SciMatrix</a>
+            <a href="https://nanoagentteam.github.io/" target="_blank" rel="noopener">NanoAgent Team</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 DSL Hackathon Series. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Background Music: Dr. Mario Fever -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/audio/fever.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+    <svg class="music-icon-on" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+      <circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <svg class="music-icon-off" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none">
+      <path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+      <circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+      <circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+      <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
