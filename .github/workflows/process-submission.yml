@@ -91,6 +91,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          gh label create "submission" --description "Project submission" --color "0E8A16" || true
           gh issue edit ${{ github.event.issue.number }} --add-label "submission"
           gh issue comment ${{ github.event.issue.number }} --body "✅ **Submission received!** Your project has been recorded successfully. Thank you for participating in the DSL Hackathon!"
           gh issue close ${{ github.event.issue.number }} --reason completed
