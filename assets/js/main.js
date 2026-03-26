@@ -589,59 +589,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (shouldScroll) {
           carouselTrack.innerHTML = cardsMarkup + cardsMarkup;
-          const duration = submissions.length * 8;
-          carouselTrack.style.animationDuration = duration + 's';
 
+          // --- rAF-based continuous scroll ---
+          const speed = 0.5; // px per frame (~30px/s at 60fps)
+          let currentX = 0;
+          let autoScroll = true;
+          let arrowAnimating = false;
           let resumeTimer = null;
+          let rafId = null;
 
-          function getAnimationX() {
-            const computed = getComputedStyle(carouselTrack).transform;
-            if (computed && computed !== 'none') {
-              return new DOMMatrix(computed).m41;
-            }
-            return 0;
+          function getHalfWidth() {
+            return carouselTrack.scrollWidth / 2;
           }
 
+          function tick() {
+            if (autoScroll && !arrowAnimating) {
+              currentX -= speed;
+              // Wrap seamlessly: when we've scrolled past the first copy
+              const half = getHalfWidth();
+              if (half > 0 && Math.abs(currentX) >= half) {
+                currentX += half;
+              }
+            }
+            carouselTrack.style.transform = `translateX(${currentX}px)`;
+            rafId = requestAnimationFrame(tick);
+          }
+          rafId = requestAnimationFrame(tick);
+
+          // Pause on hover
+          const carousel = document.getElementById('projectCarousel');
+          if (carousel) {
+            carousel.addEventListener('mouseenter', () => { autoScroll = false; });
+            carousel.addEventListener('mouseleave', () => {
+              if (!arrowAnimating) autoScroll = true;
+            });
+          }
+
+          // Arrow click: smooth shift by one card width
           function scrollByCard(direction) {
             const card = carouselTrack.querySelector('.project-card');
             if (!card) return;
             const gap = parseFloat(getComputedStyle(carouselTrack).gap) || 24;
             const shift = card.offsetWidth + gap;
 
-            // Capture current visual position
-            const currentX = getAnimationX();
+            autoScroll = false;
+            arrowAnimating = true;
 
-            // Stop CSS animation, freeze at current position
-            carouselTrack.style.animation = 'none';
-            carouselTrack.style.transform = `translateX(${currentX}px)`;
-            // Force reflow so the browser applies the above before transitioning
-            carouselTrack.offsetHeight;
+            const startX = currentX;
+            const targetX = startX + (direction === 'left' ? shift : -shift);
+            const dur = 400; // ms
+            const startTime = performance.now();
 
-            // Animate shift
-            const targetX = currentX + (direction === 'left' ? shift : -shift);
-            carouselTrack.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-            carouselTrack.style.transform = `translateX(${targetX}px)`;
+            function animate(now) {
+              const elapsed = now - startTime;
+              const t = Math.min(elapsed / dur, 1);
+              // ease-out cubic
+              const ease = 1 - Math.pow(1 - t, 3);
+              currentX = startX + (targetX - startX) * ease;
 
-            // Resume auto-scroll smoothly after 3s
-            clearTimeout(resumeTimer);
-            resumeTimer = setTimeout(() => {
-              // Read where we ended up
-              const resumeX = getAnimationX();
-              // Calculate what percentage of the total scroll that represents
-              const halfWidth = carouselTrack.scrollWidth / 2;
-              // Normalize to 0..halfWidth range
-              let normalizedX = -resumeX % halfWidth;
-              if (normalizedX < 0) normalizedX += halfWidth;
-              const progress = normalizedX / halfWidth;
+              // Wrap
+              const half = getHalfWidth();
+              if (half > 0) {
+                while (currentX < -half) currentX += half;
+                while (currentX > 0) currentX -= half;
+              }
 
-              // Remove manual styles
-              carouselTrack.style.transition = '';
-              carouselTrack.style.transform = '';
-              // Restart animation with a negative delay to resume from current position
-              carouselTrack.style.animation = `carouselScroll ${duration}s linear infinite`;
-              carouselTrack.style.animationDelay = `-${progress * duration}s`;
-              isPaused = false;
-            }, 3000);
+              if (t < 1) {
+                requestAnimationFrame(animate);
+              } else {
+                arrowAnimating = false;
+                // Resume auto-scroll after 2s
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(() => { autoScroll = true; }, 2000);
+              }
+            }
+            requestAnimationFrame(animate);
           }
 
           if (prevBtn) prevBtn.addEventListener('click', () => scrollByCard('left'));

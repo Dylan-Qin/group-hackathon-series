@@ -15,21 +15,42 @@ The inaugural DSL Hackathon focuses on leveraging generative AI tools — such a
 
 ## Features
 
-- Dark-themed, gold-accent design with particle network canvas
+- Dark/light theme toggle with gold-accent design
+- Particle network canvas background animation
 - Custom pixel cursor with trail effects
 - Scroll-reveal animations and counter animations
 - Background music with toggle control
 - Fully responsive layout
+- Edition detail pages with project carousel (infinite auto-scroll)
+- Project submission system with GitHub API enrichment (avatar, description, stars, language)
+- Time-gated submissions (only open during hackathon period)
+- "All Projects" modal with full submission details
+- GitHub Actions workflows for submission processing and metadata enrichment
 
 ## Project Structure
 
 ```
 group-hackathon-series/
-├── index.html              # Main website
+├── index.html                          # Main landing page
+├── favicon.svg                         # Site favicon
+├── editions/
+│   └── 1.html                          # Edition #1 detail page
 ├── assets/
-│   ├── css/style.css       # Styles
-│   ├── js/main.js          # JavaScript
-│   └── audio/fever.mp3     # Background music
+│   ├── css/style.css                   # Global styles
+│   ├── js/main.js                      # All JavaScript logic
+│   ├── audio/fever.mp3                 # Background music
+│   └── img/                            # Edition images
+│       ├── edition1-img1.png
+│       └── edition1-img2.png
+├── data/
+│   └── editions/
+│       └── 1/
+│           └── submissions.json        # Edition #1 project submissions
+├── .github/
+│   └── workflows/
+│       ├── jekyll-gh-pages.yml         # GitHub Pages deployment
+│       ├── process-submission.yml      # Submission processing
+│       └── enrich-submissions.yml      # GitHub API metadata enrichment
 └── README.md
 ```
 
