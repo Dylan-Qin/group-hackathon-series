@@ -161,6 +161,14 @@
             <span>No project submissions yet — be the first to submit!</span>
           </div>
         </div>
+        <div class="project-carousel__actions" id="carouselActions" style="display: none;">
+          <button class="btn" id="allProjectsBtn">
+            <span>All Projects</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -227,6 +235,21 @@
       </div>
     </section>
   </main>
+
+  <!-- All Projects Modal -->
+  <div class="modal-overlay" id="allProjectsModal">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h3 class="modal__title">All Projects</h3>
+        <button class="modal__close" id="allProjectsClose" aria-label="Close modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal__body" id="allProjectsList"></div>
+    </div>
+  </div>
 
   <!-- Submit Project Modal -->
   <div class="modal-overlay" id="submitModal">

@@ -1304,6 +1304,118 @@ body::after {
   color: var(--gold);
 }
 
+/* ---------- All Projects Button ---------- */
+
+.project-carousel__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Wide Modal Variant ---------- */
+
+.modal--wide {
+  max-width: 720px;
+}
+
+/* ---------- Project List Card (inside modal) ---------- */
+
+.project-list-card {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.project-list-card:last-child {
+  margin-bottom: 0;
+}
+
+.project-list-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.project-list-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-list-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.project-list-card__name {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.project-list-card__lead {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.project-list-card__desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.project-list-card__participants {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.project-list-card__participants strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.project-list-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.project-list-card__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.project-list-card__stat svg {
+  width: 14px;
+  height: 14px;
+}
+
+.project-list-card__stat--gold {
+  color: var(--gold);
+}
+
+@media (max-width: 580px) {
+  .modal--wide {
+    max-width: 100%;
+  }
+  .project-list-card {
+    padding: 1rem;
+  }
+}
+
 .edition-detail__content {
   padding: 0 0 clamp(5rem, 10vw, 8rem);
 }

@@ -584,6 +584,76 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           });
         }
+
+        // Show "All Projects" button and wire up modal
+        const carouselActions = document.getElementById('carouselActions');
+        if (carouselActions) carouselActions.style.display = '';
+
+        const allProjectsModal = document.getElementById('allProjectsModal');
+        const allProjectsList = document.getElementById('allProjectsList');
+        const allProjectsBtn = document.getElementById('allProjectsBtn');
+        const allProjectsClose = document.getElementById('allProjectsClose');
+
+        function listCardHTML(s) {
+          const urlParts = s.github_url.replace(/\/+$/, '').split('/');
+          const owner = urlParts[urlParts.length - 2] || '';
+          const avatarSrc = s.avatar_url || (owner ? `https://github.com/${owner}.png?size=80` : '');
+          const repoName = s.repo_name || urlParts[urlParts.length - 1] || 'Project';
+          const stars = s.stars != null ? s.stars : '--';
+          const forks = s.forks != null ? s.forks : '--';
+          const avatarEl = avatarSrc
+            ? `<img class="project-list-card__avatar" src="${avatarSrc}" alt="" loading="lazy">`
+            : '';
+          const desc = s.description
+            ? `<div class="project-list-card__desc">${s.description}</div>`
+            : `<div class="project-list-card__desc" style="font-style:italic">No description</div>`;
+          const participants = s.participants
+            ? `<div class="project-list-card__participants"><strong>Participants:</strong> ${s.participants}</div>`
+            : '';
+
+          return `
+            <a class="project-list-card" href="${s.github_url}" target="_blank" rel="noopener">
+              <div class="project-list-card__header">
+                ${avatarEl}
+                <div>
+                  <div class="project-list-card__name">${repoName}</div>
+                  <div class="project-list-card__lead">${s.project_lead}</div>
+                </div>
+              </div>
+              ${desc}
+              ${participants}
+              <div class="project-list-card__footer">
+                <span class="project-list-card__stat project-list-card__stat--gold">
+                  <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+                  ${stars}
+                </span>
+                <span class="project-list-card__stat">
+                  <svg viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-.878a2.25 2.25 0 111.5 0v.878a2.25 2.25 0 01-2.25 2.25h-1.5v2.128a2.251 2.251 0 11-1.5 0V8.5h-1.5A2.25 2.25 0 013.5 6.25v-.878a2.25 2.25 0 111.5 0zM5 3.25a.75.75 0 10-1.5 0 .75.75 0 001.5 0zm6.75.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8 12.75a.75.75 0 100-1.5.75.75 0 000 1.5z"/></svg>
+                  ${forks}
+                </span>
+              </div>
+            </a>`;
+        }
+
+        if (allProjectsBtn && allProjectsModal) {
+          function openAllProjects() {
+            allProjectsList.innerHTML = submissions.map(listCardHTML).join('');
+            allProjectsModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+          function closeAllProjects() {
+            allProjectsModal.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+          allProjectsBtn.addEventListener('click', openAllProjects);
+          allProjectsClose.addEventListener('click', closeAllProjects);
+          allProjectsModal.addEventListener('click', (e) => {
+            if (e.target === allProjectsModal) closeAllProjects();
+          });
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && allProjectsModal.classList.contains('active')) closeAllProjects();
+          });
+        }
       })
       .catch(err => {
         console.warn('Could not load submissions:', err);
