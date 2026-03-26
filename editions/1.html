@@ -200,9 +200,67 @@
             <span class="edition-detail__info-value">2-Week Sprint</span>
           </div>
         </div>
+
+        <!-- Submit Project -->
+        <div class="edition-detail__submit reveal-up" style="--delay: 0.3s">
+          <h2 class="edition-detail__section-title">Submit Your Project</h2>
+          <p class="edition-detail__submit-desc">
+            Submit your GitHub project to participate in this edition of the Hackathon. Please note that only submissions from DSL members will be considered valid entries.
+          </p>
+          <button class="btn btn--primary" id="submitProjectBtn">
+            <span>Submit Project</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   </main>
+
+  <!-- Submit Project Modal -->
+  <div class="modal-overlay" id="submitModal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Submit Project</h3>
+        <button class="modal__close" id="modalClose" aria-label="Close modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <form id="submitForm" novalidate>
+        <div class="modal__body">
+          <div class="form-group">
+            <label class="form-label" for="githubUrl">GitHub Project URL <span class="form-required">*</span></label>
+            <input class="form-input" type="url" id="githubUrl" placeholder="https://github.com/username/repo" required>
+            <span class="form-error" id="githubUrlError">Please enter a valid GitHub URL</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectLead">Project Lead <span class="form-required">*</span></label>
+            <input class="form-input" type="text" id="projectLead" placeholder="Your name" required>
+            <span class="form-error" id="projectLeadError">Project lead is required</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="participants">Participants</label>
+            <input class="form-input" type="text" id="participants" placeholder="Comma-separated names (optional)">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectDesc">Project Description</label>
+            <textarea class="form-input form-textarea" id="projectDesc" rows="4" placeholder="Brief description of your project (optional)"></textarea>
+          </div>
+        </div>
+        <div class="modal__footer">
+          <button type="button" class="btn btn--outline" id="modalCancel">Cancel</button>
+          <button type="submit" class="btn btn--primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
 
   <!-- Footer -->
   <footer class="footer">

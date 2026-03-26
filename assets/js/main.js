@@ -414,4 +414,95 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ---------- Submit Project Modal ----------
+  const submitBtn = document.getElementById('submitProjectBtn');
+  const submitModal = document.getElementById('submitModal');
+  const submitForm = document.getElementById('submitForm');
+  const modalClose = document.getElementById('modalClose');
+  const modalCancel = document.getElementById('modalCancel');
+  const toast = document.getElementById('toast');
+
+  if (submitBtn && submitModal) {
+    function openModal() {
+      submitModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      submitModal.classList.remove('active');
+      document.body.style.overflow = '';
+      clearErrors();
+    }
+
+    function clearErrors() {
+      submitForm.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+    }
+
+    function showToast(msg, isError) {
+      toast.textContent = msg;
+      toast.className = 'toast visible' + (isError ? ' error' : '');
+      setTimeout(() => { toast.className = 'toast'; }, 3000);
+    }
+
+    submitBtn.addEventListener('click', openModal);
+    modalClose.addEventListener('click', closeModal);
+    modalCancel.addEventListener('click', closeModal);
+    submitModal.addEventListener('click', (e) => {
+      if (e.target === submitModal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && submitModal.classList.contains('active')) closeModal();
+    });
+
+    submitForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      const githubUrl = document.getElementById('githubUrl');
+      const projectLead = document.getElementById('projectLead');
+      const participants = document.getElementById('participants');
+      const projectDesc = document.getElementById('projectDesc');
+      let valid = true;
+
+      // Validate GitHub URL
+      const urlValue = githubUrl.value.trim();
+      if (!urlValue || !urlValue.includes('github.com')) {
+        githubUrl.classList.add('error');
+        valid = false;
+      } else {
+        try { new URL(urlValue); } catch { githubUrl.classList.add('error'); valid = false; }
+      }
+
+      // Validate project lead
+      if (!projectLead.value.trim()) {
+        projectLead.classList.add('error');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Build GitHub Issue
+      const title = `[Project Submission] ${projectLead.value.trim()} - Hackathon #1`;
+      const bodyParts = [
+        `## Project Submission`,
+        ``,
+        `**GitHub Repository:** ${urlValue}`,
+        `**Project Lead:** ${projectLead.value.trim()}`,
+      ];
+      if (participants.value.trim()) {
+        bodyParts.push(`**Participants:** ${participants.value.trim()}`);
+      }
+      if (projectDesc.value.trim()) {
+        bodyParts.push(``, `### Description`, projectDesc.value.trim());
+      }
+
+      const issueUrl = `https://github.com/Dylan-Qin/group-hackathon-series/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(bodyParts.join('\n'))}`;
+
+      window.open(issueUrl, '_blank');
+      showToast('Redirected to GitHub — please confirm and submit the issue.');
+      submitForm.reset();
+      closeModal();
+    });
+  }
+
 });
