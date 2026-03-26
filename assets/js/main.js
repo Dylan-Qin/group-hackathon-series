@@ -523,8 +523,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function cardHTML(s) {
-          const avatarSrc = s.avatar_url || '';
-          const repoName = s.repo_name || s.github_url.split('/').pop() || 'Project';
+          // Derive avatar from github_url owner if not enriched yet
+          const urlParts = s.github_url.replace(/\/+$/, '').split('/');
+          const owner = urlParts[urlParts.length - 2] || '';
+          const avatarSrc = s.avatar_url || (owner ? `https://github.com/${owner}.png?size=72` : '');
+          const repoName = s.repo_name || urlParts[urlParts.length - 1] || 'Project';
           const stars = s.stars != null ? s.stars : '--';
           const forks = s.forks != null ? s.forks : '--';
           const avatarEl = avatarSrc
@@ -554,13 +557,19 @@ document.addEventListener('DOMContentLoaded', () => {
             </a>`;
         }
 
-        // Build cards, duplicate for seamless loop
+        // Build cards — only scroll if more than 3 projects
         const cardsMarkup = submissions.map(cardHTML).join('');
-        carouselTrack.innerHTML = cardsMarkup + cardsMarkup;
+        const shouldScroll = submissions.length > 3;
 
-        // Dynamic animation duration: ~8s per card
-        const duration = submissions.length * 8;
-        carouselTrack.style.animationDuration = duration + 's';
+        if (shouldScroll) {
+          carouselTrack.innerHTML = cardsMarkup + cardsMarkup;
+          const duration = submissions.length * 8;
+          carouselTrack.style.animationDuration = duration + 's';
+        } else {
+          carouselTrack.innerHTML = cardsMarkup;
+          carouselTrack.style.animation = 'none';
+          carouselTrack.style.justifyContent = 'center';
+        }
 
         // Register cursor hover for dynamically added cards
         if (pixelCursor && cursor) {
