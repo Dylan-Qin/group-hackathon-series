@@ -444,7 +444,20 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => { toast.className = 'toast'; }, 3000);
     }
 
-    submitBtn.addEventListener('click', openModal);
+    submitBtn.addEventListener('click', () => {
+      const now = new Date();
+      const start = new Date('2026-04-06T00:00:00');
+      const end = new Date('2026-04-20T00:00:00');
+      if (now < start) {
+        showToast('Submission is not open yet — starts April 6, 2026', true);
+        return;
+      }
+      if (now >= end) {
+        showToast('Submission has ended — closed after April 19, 2026', true);
+        return;
+      }
+      openModal();
+    });
     modalClose.addEventListener('click', closeModal);
     modalCancel.addEventListener('click', closeModal);
     submitModal.addEventListener('click', (e) => {
