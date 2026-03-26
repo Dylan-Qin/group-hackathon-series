@@ -522,6 +522,17 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
+        // Deduplicate by github_url, keeping the latest submission
+        const deduped = new Map();
+        submissions.forEach(s => {
+          const key = s.github_url.replace(/\/+$/, '').toLowerCase();
+          const existing = deduped.get(key);
+          if (!existing || (s.submitted_at && (!existing.submitted_at || s.submitted_at > existing.submitted_at))) {
+            deduped.set(key, s);
+          }
+        });
+        submissions = Array.from(deduped.values());
+
         function cardHTML(s) {
           // Derive avatar from github_url owner if not enriched yet
           const urlParts = s.github_url.replace(/\/+$/, '').split('/');
@@ -560,15 +571,75 @@ document.addEventListener('DOMContentLoaded', () => {
         // Build cards — only scroll if more than 3 projects
         const cardsMarkup = submissions.map(cardHTML).join('');
         const shouldScroll = submissions.length > 3;
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
 
         if (shouldScroll) {
           carouselTrack.innerHTML = cardsMarkup + cardsMarkup;
           const duration = submissions.length * 8;
           carouselTrack.style.animationDuration = duration + 's';
+
+          let resumeTimer = null;
+
+          function getAnimationX() {
+            const computed = getComputedStyle(carouselTrack).transform;
+            if (computed && computed !== 'none') {
+              return new DOMMatrix(computed).m41;
+            }
+            return 0;
+          }
+
+          function scrollByCard(direction) {
+            const card = carouselTrack.querySelector('.project-card');
+            if (!card) return;
+            const gap = parseFloat(getComputedStyle(carouselTrack).gap) || 24;
+            const shift = card.offsetWidth + gap;
+
+            // Capture current visual position
+            const currentX = getAnimationX();
+
+            // Stop CSS animation, freeze at current position
+            carouselTrack.style.animation = 'none';
+            carouselTrack.style.transform = `translateX(${currentX}px)`;
+            // Force reflow so the browser applies the above before transitioning
+            carouselTrack.offsetHeight;
+
+            // Animate shift
+            const targetX = currentX + (direction === 'left' ? shift : -shift);
+            carouselTrack.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+            carouselTrack.style.transform = `translateX(${targetX}px)`;
+
+            // Resume auto-scroll smoothly after 3s
+            clearTimeout(resumeTimer);
+            resumeTimer = setTimeout(() => {
+              // Read where we ended up
+              const resumeX = getAnimationX();
+              // Calculate what percentage of the total scroll that represents
+              const halfWidth = carouselTrack.scrollWidth / 2;
+              // Normalize to 0..halfWidth range
+              let normalizedX = -resumeX % halfWidth;
+              if (normalizedX < 0) normalizedX += halfWidth;
+              const progress = normalizedX / halfWidth;
+
+              // Remove manual styles
+              carouselTrack.style.transition = '';
+              carouselTrack.style.transform = '';
+              // Restart animation with a negative delay to resume from current position
+              carouselTrack.style.animation = `carouselScroll ${duration}s linear infinite`;
+              carouselTrack.style.animationDelay = `-${progress * duration}s`;
+              isPaused = false;
+            }, 3000);
+          }
+
+          if (prevBtn) prevBtn.addEventListener('click', () => scrollByCard('left'));
+          if (nextBtn) nextBtn.addEventListener('click', () => scrollByCard('right'));
         } else {
           carouselTrack.innerHTML = cardsMarkup;
           carouselTrack.style.animation = 'none';
           carouselTrack.style.justifyContent = 'center';
+          // Hide arrows when not enough to scroll
+          if (prevBtn) prevBtn.style.display = 'none';
+          if (nextBtn) nextBtn.style.display = 'none';
         }
 
         // Register cursor hover for dynamically added cards
