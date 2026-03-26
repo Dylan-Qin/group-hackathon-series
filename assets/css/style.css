@@ -1290,12 +1290,16 @@ body::after {
 }
 
 .edition-detail__submit-visual {
-  flex: 0 0 300px;
+  flex: 0 0 200px;
+  display: flex;
+  align-items: center;
 }
 
 .edition-detail__submit-img {
   width: 100%;
   height: auto;
+  max-height: 180px;
+  object-fit: contain;
   border-radius: 8px;
   opacity: 0.85;
   transition: opacity 0.3s ease;
@@ -1312,8 +1316,8 @@ body::after {
   }
 
   .edition-detail__submit-visual {
-    width: 100%;
-    max-width: 280px;
+    flex: none;
+    width: 200px;
   }
 }
 
