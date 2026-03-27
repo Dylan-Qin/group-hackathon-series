@@ -1,0 +1,40 @@
+name: Process Pre-registration
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-preregistration:
+    if: startsWith(github.event.issue.title, '[Pre-registration]')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Post to tracking issue and close
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          TRACKING_ISSUE=3
+
+          # Build comment with attribution
+          COMMENT="$(cat <<EOF
+          ${ISSUE_BODY}
+
+          ---
+          _Submitted by @${ISSUE_AUTHOR} via #${ISSUE_NUMBER}_
+          EOF
+          )"
+
+          # Post as comment on the tracking issue
+          gh issue comment "$TRACKING_ISSUE" --repo "${{ github.repository }}" --body "$COMMENT"
+
+          # Label and close the individual issue
+          gh label create "pre-registration" --repo "${{ github.repository }}" --description "Hackathon pre-registration" --color "1D76DB" 2>/dev/null || true
+          gh issue edit "$ISSUE_NUMBER" --repo "${{ github.repository }}" --add-label "pre-registration"
+          gh issue comment "$ISSUE_NUMBER" --repo "${{ github.repository }}" --body "✅ Your pre-registration has been posted to the [Team Formation & Ideas thread](https://github.com/${{ github.repository }}/issues/${TRACKING_ISSUE}). Head there to discuss and find teammates!"
+          gh issue close "$ISSUE_NUMBER" --repo "${{ github.repository }}" --reason completed
