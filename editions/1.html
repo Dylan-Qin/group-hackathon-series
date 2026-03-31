@@ -114,7 +114,7 @@
         <li><a href="../index.html#editions" class="nav__link">Editions</a></li>
         <li><a href="../index.html#contact" class="nav__link">Contact</a></li>
       </ul>
-      <button class="nav__menu-btn" id="menuBtn">
+      <button class="nav__menu-btn" id="menuBtn" aria-label="Toggle menu">
         <span></span>
         <span></span>
       </button>
@@ -226,7 +226,7 @@
         <!-- Pre-register Your Idea -->
         <div class="edition-detail__prereg reveal-up" style="--delay: 0.25s">
           <div class="edition-detail__prereg-header">
-            <span class="edition-detail__prereg-icon">💡</span>
+            <span class="edition-detail__prereg-icon" aria-hidden="true">💡</span>
             <h2 class="edition-detail__section-title">Pre-register Your Idea</h2>
           </div>
           <p class="edition-detail__prereg-desc">
@@ -277,9 +277,9 @@
 
   <!-- All Projects Modal -->
   <div class="modal-overlay" id="allProjectsModal">
-    <div class="modal modal--wide">
+    <div class="modal modal--wide" role="dialog" aria-modal="true" aria-labelledby="allProjectsTitle">
       <div class="modal__header">
-        <h3 class="modal__title">All Projects</h3>
+        <h3 class="modal__title" id="allProjectsTitle">All Projects</h3>
         <button class="modal__close" id="allProjectsClose" aria-label="Close modal">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -292,9 +292,9 @@
 
   <!-- Submit Project Modal -->
   <div class="modal-overlay" id="submitModal">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle">
       <div class="modal__header">
-        <h3 class="modal__title">Submit Project</h3>
+        <h3 class="modal__title" id="submitModalTitle">Submit Project</h3>
         <button class="modal__close" id="modalClose" aria-label="Close modal">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -332,9 +332,9 @@
 
   <!-- Pre-register Modal -->
   <div class="modal-overlay" id="preRegModal">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="preRegModalTitle">
       <div class="modal__header">
-        <h3 class="modal__title">Pre-register Your Idea</h3>
+        <h3 class="modal__title" id="preRegModalTitle">Pre-register Your Idea</h3>
         <button class="modal__close" id="preRegClose" aria-label="Close modal">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
