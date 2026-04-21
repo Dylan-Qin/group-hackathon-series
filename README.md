@@ -6,7 +6,7 @@ A multi-format hackathon program by [DSL (Data Intelligence for Scientific Innov
 
 **DSL Hackathon #1 (Apr-May 2026)**
 
-- **Date:** April 20 — May 03, 2026
+- **Date:** April 20 — May 05, 2026
 - **Location:** DSL 511
 - **Theme:** Enhancing Research Efficiency with Generative AI
 - **Participants:** DSL Members
@@ -60,3 +60,4 @@ group-hackathon-series/
 - [SciHorizon](https://www.scihorizon.cn/)
 - [SciMatrix](https://www.scimatrix.cn/)
 - [NanoAgent Team](https://nanoagentteam.github.io/)
+

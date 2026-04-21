@@ -11,44 +11,22 @@ jobs:
     permissions:
       contents: write
       issues: write
-    env:
-      HACKATHON_TZ: Asia/Shanghai
-      SUBMISSION_START_AT: '2026-04-20 00:00:00'
-      SUBMISSION_END_AT: '2026-05-04 00:00:00'
 
     steps:
-      - name: Validate submission window
-        id: validate-window
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
+      - name: Check submission window
         run: |
-          NOW=$(TZ="$HACKATHON_TZ" date +%s)
-          START=$(TZ="$HACKATHON_TZ" date -d "$SUBMISSION_START_AT" +%s)
-          END=$(TZ="$HACKATHON_TZ" date -d "$SUBMISSION_END_AT" +%s)
-
-          if [ "$NOW" -lt "$START" ]; then
-            gh issue comment "$ISSUE_NUMBER" --repo "${{ github.repository }}" --body "**Submissions are not open yet.** Hackathon #1 project submissions open on April 20, 2026 (Asia/Shanghai). Please resubmit once the event begins."
-            gh issue close "$ISSUE_NUMBER" --repo "${{ github.repository }}" --reason not_planned
-            echo "window_open=false" >> "$GITHUB_OUTPUT"
-            exit 0
+          NOW=$(TZ=Asia/Shanghai date +%s)
+          OPEN=$(TZ=Asia/Shanghai date -d '2026-04-20 00:00:00' +%s)
+          CLOSE=$(TZ=Asia/Shanghai date -d '2026-05-06 00:00:00' +%s)
+          if [ "$NOW" -lt "$OPEN" ] || [ "$NOW" -ge "$CLOSE" ]; then
+            echo "::error::Submission window is Apr 20 – May 05, 2026 (Asia/Shanghai). Current time is outside this range."
+            exit 1
           fi
-
-          if [ "$NOW" -ge "$END" ]; then
-            gh issue comment "$ISSUE_NUMBER" --repo "${{ github.repository }}" --body "**Submissions are closed.** Hackathon #1 accepted project submissions through May 3, 2026 (Asia/Shanghai)."
-            gh issue close "$ISSUE_NUMBER" --repo "${{ github.repository }}" --reason not_planned
-            echo "window_open=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          echo "window_open=true" >> "$GITHUB_OUTPUT"
 
       - name: Checkout repository
-        if: steps.validate-window.outputs.window_open == 'true'
         uses: actions/checkout@v4
 
       - name: Parse issue and save submission
-        if: steps.validate-window.outputs.window_open == 'true'
         env:
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
@@ -112,7 +90,6 @@ jobs:
           cat "$DATA_FILE"
 
       - name: Commit and push
-        if: steps.validate-window.outputs.window_open == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -121,7 +98,6 @@ jobs:
           git push
 
       - name: Label and close issue
-        if: steps.validate-window.outputs.window_open == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
