@@ -10,31 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
-    env:
-      HACKATHON_TZ: Asia/Shanghai
-      PREREGISTRATION_CLOSES_AT: '2026-04-20 00:00:00'
 
     steps:
-      - name: Validate pre-registration window
-        id: validate-window
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
+      - name: Check pre-registration deadline
         run: |
-          NOW=$(TZ="$HACKATHON_TZ" date +%s)
-          CLOSES_AT=$(TZ="$HACKATHON_TZ" date -d "$PREREGISTRATION_CLOSES_AT" +%s)
-
-          if [ "$NOW" -ge "$CLOSES_AT" ]; then
-            gh issue comment "$ISSUE_NUMBER" --repo "${{ github.repository }}" --body "**Pre-registration is closed.** Hackathon #1 now runs April 20 - May 3, 2026 (Asia/Shanghai), so team formation closed when the event began."
-            gh issue close "$ISSUE_NUMBER" --repo "${{ github.repository }}" --reason not_planned
-            echo "window_open=false" >> "$GITHUB_OUTPUT"
-            exit 0
+          NOW=$(TZ=Asia/Shanghai date +%s)
+          DEADLINE=$(TZ=Asia/Shanghai date -d '2026-04-20 00:00:00' +%s)
+          if [ "$NOW" -ge "$DEADLINE" ]; then
+            echo "::error::Pre-registration closed on Apr 20, 2026 (Asia/Shanghai). The hackathon has begun."
+            exit 1
           fi
 
-          echo "window_open=true" >> "$GITHUB_OUTPUT"
-
       - name: Post to tracking issue and close
-        if: steps.validate-window.outputs.window_open == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_BODY: ${{ github.event.issue.body }}

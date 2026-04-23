@@ -3,14 +3,6 @@
    ======================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hackathonSchedule = {
-    startsAt: new Date('2026-04-20T00:00:00+08:00'),
-    preRegistrationClosesAt: new Date('2026-04-20T00:00:00+08:00'),
-    submissionsCloseAt: new Date('2026-05-04T00:00:00+08:00'),
-    startsLabel: 'April 20, 2026',
-    endsLabel: 'May 3, 2026',
-    windowLabel: 'April 20 — May 3, 2026',
-  };
 
   // ---------- Pixel Cursor + Ring Follower + Trail ----------
   const pixelCursor = document.getElementById('cursorPixel');
@@ -438,12 +430,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitBtn.addEventListener('click', () => {
       const now = new Date();
-      if (now < hackathonSchedule.startsAt) {
-        showToast(`Submission is not open yet — starts ${hackathonSchedule.startsLabel}`, true);
+      const tz = 'Asia/Shanghai';
+      const nowCST = new Date(now.toLocaleString('en-US', { timeZone: tz }));
+      const start = new Date('2026-04-20T00:00:00+08:00');
+      const end   = new Date('2026-05-06T00:00:00+08:00');
+      if (nowCST < start) {
+        showToast('Submission is not open yet — starts April 20, 2026', true);
         return;
       }
-      if (now >= hackathonSchedule.submissionsCloseAt) {
-        showToast(`Submission has ended — closed after ${hackathonSchedule.endsLabel}`, true);
+      if (nowCST >= end) {
+        showToast('Submission has ended — closed after May 05, 2026', true);
         return;
       }
       openModal();
@@ -529,8 +525,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     preRegBtn.addEventListener('click', () => {
       const now = new Date();
-      if (now >= hackathonSchedule.preRegistrationClosesAt) {
-        showToast(`Pre-registration has closed — Hackathon #1 now runs ${hackathonSchedule.windowLabel}.`, true);
+      const tz = 'Asia/Shanghai';
+      const nowCST = new Date(now.toLocaleString('en-US', { timeZone: tz }));
+      const start = new Date('2026-04-20T00:00:00+08:00');
+      if (nowCST >= start) {
+        showToast('Pre-registration has closed — the hackathon has begun!', true);
         return;
       }
       openPreReg();
