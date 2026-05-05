@@ -26,5 +26,13 @@
     "participants": "",
     "description": "Research Safari 是一个科研探索型项目，核心目标是从论文与相关文献中提取关键概念、机制与证据，并进一步生成具有新颖性和可验证性的研究假设。它整合了 PDF 导入、文献检索、LLM 抽取与假设融合流程，帮助研究者将文献阅读高效转化为创新性的科研问题与下一步研究方向。",
     "submitted_at": "2026-05-05T09:29:51Z"
+  },
+  {
+    "issue_number": 16,
+    "github_url": "https://github.com/TRcreeper/FigableSearch",
+    "project_lead": "Zihan Wang",
+    "participants": "",
+    "description": "面向科研写作的轻量级论文图表参考检索工具。",
+    "submitted_at": "2026-05-05T10:15:14Z"
   }
 ]
