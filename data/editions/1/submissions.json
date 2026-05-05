@@ -18,5 +18,13 @@
     "participants": "",
     "description": "一个 Chrome 扩展，在 AI 平台（ChatGPT/Gemini/Grok/AI Studio）生成回答完成时发送桌面通知和声音提醒，让用户在等待期间可以自由切换任务而不错过结果。\n基于 chixi4/streaming-complete-notifier fork 开发，新增功能包括：\n- 新增 Grok 平台支持\n- 通知标题展示用户原始提问（前35字截取），一眼识别是哪条对话\n- 后台保活功能（伪装 Page Visibility API），防止 ChatGPT 切标签页后暂停流式传输\n- 增强 ChatGPT 画图完成检测（JSON 解析 + DOM 兜底 + 失败通知三层冗余）\n- 重构 ChatGPT 完成检测逻辑（img2更新后原逻辑实效） + Gemini prompt 捕获",
     "submitted_at": "2026-05-05T09:29:16Z"
+  },
+  {
+    "issue_number": 15,
+    "github_url": "https://github.com/wyy1314z/research-safari",
+    "project_lead": "王宇阳",
+    "participants": "",
+    "description": "Research Safari 是一个科研探索型项目，核心目标是从论文与相关文献中提取关键概念、机制与证据，并进一步生成具有新颖性和可验证性的研究假设。它整合了 PDF 导入、文献检索、LLM 抽取与假设融合流程，帮助研究者将文献阅读高效转化为创新性的科研问题与下一步研究方向。",
+    "submitted_at": "2026-05-05T09:29:51Z"
   }
 ]
