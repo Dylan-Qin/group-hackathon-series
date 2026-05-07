@@ -433,13 +433,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const tz = 'Asia/Shanghai';
       const nowCST = new Date(now.toLocaleString('en-US', { timeZone: tz }));
       const start = new Date('2026-04-20T00:00:00+08:00');
-      const end   = new Date('2026-05-06T00:00:00+08:00');
       if (nowCST < start) {
         showToast('Submission is not open yet — starts April 20, 2026', true);
-        return;
-      }
-      if (nowCST >= end) {
-        showToast('Submission has ended — closed after May 05, 2026', true);
         return;
       }
       openModal();
