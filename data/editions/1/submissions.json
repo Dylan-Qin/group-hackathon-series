@@ -46,5 +46,13 @@
     "repo_name": "FigableSearch",
     "stars": 0,
     "forks": 0
+  },
+  {
+    "issue_number": 19,
+    "github_url": "https://github.com/poketjomon/paper-search",
+    "project_lead": "Zhenxing Wang",
+    "participants": "",
+    "description": "一个 Claude Code Skill 套件，用于论文检索、快速摘要与深度阅读工作流\n\n当该 skill 已安装后，可直接让 Claude 执行类似请求：\n\n你：帮我找 2024 ICLR 上 diffusion policy 的论文，最好有代码\nClaude：<调用 papersearch 的 search 路由并返回论文列表>\n\n你：快速看这篇论文：https://arxiv.org/abs/2401.12345\nClaude：<调用 lookup 路由并返回结构化 brief>\n\n你：深度分析这篇论文的方法与实验设计，给出是否值得精读\nClaude：<调用 reader 路由并返回深度分析>",
+    "submitted_at": "2026-05-07T03:54:45Z"
   }
 ]
