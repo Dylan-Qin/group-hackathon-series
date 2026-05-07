@@ -62,5 +62,13 @@
     "participants": "",
     "description": "让codex把你感兴趣的论文做成图文并茂的可分享稿件",
     "submitted_at": "2026-05-07T06:26:55Z"
+  },
+  {
+    "issue_number": 21,
+    "github_url": "https://github.com/shcw0405/audio-to-action",
+    "project_lead": "蔡旭",
+    "participants": "",
+    "description": "一个 Claude Code skill，用于将研究组 / 办公室录音转化为可审阅的结构化成果物——例如会议摘要、按人划分的任务、语音备忘录待办事项、消息草稿——而不是只生成一大段转写文本。",
+    "submitted_at": "2026-05-07T07:24:58Z"
   }
 ]
