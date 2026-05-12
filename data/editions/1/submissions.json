@@ -82,5 +82,13 @@
     "repo_name": "audio-to-action",
     "stars": 0,
     "forks": 0
+  },
+  {
+    "issue_number": 22,
+    "github_url": "https://github.com/YufeiHouAnne/SciData-Insight-Agent",
+    "project_lead": "HouYuFei",
+    "participants": "",
+    "description": "An AI system automating academic data visualization, table formatting, and scientific interpretation.",
+    "submitted_at": "2026-05-12T11:03:56Z"
   }
 ]
