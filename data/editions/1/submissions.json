@@ -89,6 +89,10 @@
     "project_lead": "HouYuFei",
     "participants": "",
     "description": "An AI system automating academic data visualization, table formatting, and scientific interpretation.",
-    "submitted_at": "2026-05-12T11:03:56Z"
+    "submitted_at": "2026-05-12T11:03:56Z",
+    "avatar_url": "https://avatars.githubusercontent.com/u/164989492?v=4",
+    "repo_name": "SciData-Insight-Agent",
+    "stars": 1,
+    "forks": 0
   }
 ]
