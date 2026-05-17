@@ -94,5 +94,13 @@
     "repo_name": "SciData-Insight-Agent",
     "stars": 1,
     "forks": 0
+  },
+  {
+    "issue_number": 23,
+    "github_url": "https://github.com/Caipeng-Li/DeepShit",
+    "project_lead": "李金鹏",
+    "participants": "",
+    "description": "多智能体勾史idea生成系统",
+    "submitted_at": "2026-05-17T05:57:53Z"
   }
 ]
