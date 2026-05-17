@@ -106,5 +106,13 @@
     "repo_name": "DeepShit",
     "stars": 0,
     "forks": 0
+  },
+  {
+    "issue_number": 24,
+    "github_url": "https://github.com/HeyElena/FragmentIsles",
+    "project_lead": "Tianqi He",
+    "participants": "",
+    "description": "帮助研究者收集、整理、关联和总结散落的碎片化信息。",
+    "submitted_at": "2026-05-17T22:54:36Z"
   }
 ]
