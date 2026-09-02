@@ -35,9 +35,15 @@ test('edition 1 lists all confirmed awards and has no active entry controls', as
 });
 
 test('award presentation has responsive styling hooks', async () => {
+  const edition = await read('../editions/1.html');
   const styles = await read('../assets/css/style.css');
 
-  assert.match(styles, /\.award-results__grid/);
+  const awards = edition.match(/<section class="award-results[\s\S]*?<\/section>/)?.[0];
+
+  assert.ok(awards, 'award results section exists');
+  assert.match(awards, /<div class="award-results__grid">[\s\S]*?award-card--popular[\s\S]*?<\/div>\s*<\/section>/);
+  assert.match(styles, /\.award-results__grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, 1fr\)/);
+  assert.match(styles, /\.award-card\s*\{[\s\S]*?min-height:\s*11.75rem/);
   assert.match(styles, /\.award-card--popular/);
   assert.match(styles, /@media \(max-width: 768px\)[\s\S]*?\.award-results__grid/);
 });

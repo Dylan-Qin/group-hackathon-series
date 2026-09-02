@@ -1510,11 +1510,15 @@ body::after {
 
 .award-results__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
 .award-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 11.75rem;
   padding: 1.5rem;
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -1542,10 +1546,10 @@ body::after {
 }
 
 .award-card--popular {
+  flex-direction: row;
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: 1rem;
   border-color: rgba(192, 174, 127, 0.55);
   background: rgba(192, 174, 127, 0.08);
 }
