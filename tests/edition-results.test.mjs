@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
@@ -48,4 +49,16 @@ test('award presentation has responsive styling hooks', async () => {
   assert.match(styles, /\.award-card--popular/);
   assert.doesNotMatch(styles, /\.award-card__icon/);
   assert.match(styles, /@media \(max-width: 768px\)[\s\S]*?\.award-results__grid/);
+});
+
+test('pages cache-bust the shared stylesheet with its content hash', async () => {
+  const [homepage, edition, styles] = await Promise.all([
+    read('../index.html'),
+    read('../editions/1.html'),
+    read('../assets/css/style.css'),
+  ]);
+  const version = createHash('sha256').update(styles).digest('hex').slice(0, 12);
+
+  assert.match(homepage, new RegExp(`href="assets/css/style\\.css\\?v=${version}"`));
+  assert.match(edition, new RegExp(`href="\\.\\./assets/css/style\\.css\\?v=${version}"`));
 });
