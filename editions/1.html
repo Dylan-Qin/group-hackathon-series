@@ -195,6 +195,40 @@
           </p>
         </div>
 
+        <!-- Award Results -->
+        <section class="award-results reveal-up" id="award-results" style="--delay: 0.15s" aria-labelledby="awardResultsTitle">
+          <div class="award-results__header">
+            <span class="section__label">Edition 1 · Final Results</span>
+            <h2 class="edition-detail__section-title" id="awardResultsTitle">Award Results</h2>
+            <p>Selected through our joint vote, these projects stood out for their creativity, execution, and research impact.</p>
+          </div>
+          <div class="award-results__grid">
+            <article class="award-card">
+              <span class="award-card__eyebrow">Best Project Award</span>
+              <h3>FragmentIsles — 贺天琦</h3>
+              <p>Congratulations on this achievement.</p>
+            </article>
+            <article class="award-card">
+              <span class="award-card__eyebrow">Best Project Award</span>
+              <h3>paperpulse-skill — 陈梓兴</h3>
+              <p>Congratulations on this achievement.</p>
+            </article>
+            <article class="award-card">
+              <span class="award-card__eyebrow">Best Project Award</span>
+              <h3>whyamihere — 李笑寒</h3>
+              <p>Congratulations on this achievement.</p>
+            </article>
+          </div>
+          <article class="award-card award-card--popular">
+            <span class="award-card__icon" aria-hidden="true">★</span>
+            <div>
+              <span class="award-card__eyebrow">Most Popular Project</span>
+              <h3>streaming-complete-notifier — 蔡旭</h3>
+              <p>Determined by GitHub stars.</p>
+            </div>
+          </article>
+        </section>
+
         <!-- Details Grid -->
         <div class="edition-detail__info-grid reveal-up" style="--delay: 0.2s">
           <div class="edition-detail__info-card">
@@ -223,52 +257,12 @@
           </div>
         </div>
 
-        <!-- Pre-register Your Idea -->
-        <div class="edition-detail__prereg reveal-up" style="--delay: 0.25s">
-          <div class="edition-detail__prereg-header">
-            <span class="edition-detail__prereg-icon" aria-hidden="true">💡</span>
-            <h2 class="edition-detail__section-title">Pre-register Your Idea</h2>
-          </div>
-          <p class="edition-detail__prereg-desc">
-            Have a project idea for the hackathon? Share it now so others can find you, discuss, and form teams before the event officially begins. All ideas are collected in a single discussion thread.
-          </p>
-          <div class="edition-detail__prereg-actions">
-            <button class="btn btn--primary" id="preRegBtn">
-              <span>Pre-register</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
-                <path d="M20 8v6M23 11h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <a class="btn btn--outline" id="viewPreRegsBtn" href="https://github.com/Dylan-Qin/group-hackathon-series/issues/3" target="_blank" rel="noopener">
-              <span>View Pre-registrations</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M15 3h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Submit Project -->
-        <div class="edition-detail__submit reveal-up" style="--delay: 0.3s">
-          <div class="edition-detail__submit-content">
-            <h2 class="edition-detail__section-title">Submit Your Project</h2>
-            <p class="edition-detail__submit-desc">
-              Submit your GitHub project to participate in this edition of the Hackathon. Please note that only submissions from DSL members will be considered valid entries.
-            </p>
-            <button class="btn btn--primary" id="submitProjectBtn">
-              <span>Submit Project</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          <div class="edition-detail__submit-visual">
-            <img src="../assets/img/edition1-img2.png" alt="Hackathon #1" class="edition-detail__submit-img">
+        <!-- Completed Event State -->
+        <div class="edition-detail__closed reveal-up" style="--delay: 0.3s">
+          <span class="edition-detail__closed-icon" aria-hidden="true">✓</span>
+          <div>
+            <h2 class="edition-detail__section-title">Submissions Closed</h2>
+            <p>Hackathon #1 has concluded. Thank you to everyone who participated — browse all submitted projects above.</p>
           </div>
         </div>
       </div>

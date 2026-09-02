@@ -1493,6 +1493,90 @@ body::after {
   margin-bottom: 0;
 }
 
+/* ── Award Results ── */
+.award-results {
+  margin: 0 0 clamp(3rem, 6vw, 5rem);
+}
+
+.award-results__header {
+  max-width: 42rem;
+  margin-bottom: 2rem;
+}
+
+.award-results__header p {
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.award-results__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.award-card {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.award-card__eyebrow {
+  color: var(--gold);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.award-card h3 {
+  margin: 0.75rem 0;
+  font-size: 1.125rem;
+  line-height: 1.45;
+}
+
+.award-card p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.award-card--popular {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-color: rgba(192, 174, 127, 0.55);
+  background: rgba(192, 174, 127, 0.08);
+}
+
+.award-card__icon,
+.edition-detail__closed-icon {
+  color: var(--gold);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.edition-detail__closed {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.edition-detail__closed .edition-detail__section-title {
+  margin-bottom: 0.5rem;
+}
+
+.edition-detail__closed p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
 .edition-detail__info-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1529,6 +1613,15 @@ body::after {
 }
 
 @media (max-width: 768px) {
+  .award-results__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .award-card--popular,
+  .edition-detail__closed {
+    align-items: flex-start;
+  }
+
   .edition-detail__info-grid {
     grid-template-columns: 1fr 1fr;
   }
