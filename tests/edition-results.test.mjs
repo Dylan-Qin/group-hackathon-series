@@ -42,8 +42,10 @@ test('award presentation has responsive styling hooks', async () => {
 
   assert.ok(awards, 'award results section exists');
   assert.match(awards, /<div class="award-results__grid">[\s\S]*?award-card--popular[\s\S]*?<\/div>\s*<\/section>/);
+  assert.doesNotMatch(awards, /award-card__icon/);
   assert.match(styles, /\.award-results__grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, 1fr\)/);
   assert.match(styles, /\.award-card\s*\{[\s\S]*?min-height:\s*11.75rem/);
   assert.match(styles, /\.award-card--popular/);
+  assert.doesNotMatch(styles, /\.award-card__icon/);
   assert.match(styles, /@media \(max-width: 768px\)[\s\S]*?\.award-results__grid/);
 });

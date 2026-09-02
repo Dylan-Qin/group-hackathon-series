@@ -29,7 +29,7 @@ Close the first DSL Hackathon with a durable public announcement of its award re
 
 - Keep the site’s existing charcoal, warm-gold, and pale-text visual system.
 - Use a responsive 2×2 grid of four equal-size award cards on desktop, each showing project name, recipient name, and award label.
-- Keep the three Best Project cards in the standard surface treatment; distinguish the Most Popular Project card with a star icon and gold-tinted border and background.
+- Keep the three Best Project cards in the standard surface treatment; distinguish the Most Popular Project card only with a gold-tinted border and background.
 - On narrow screens, award cards stack into one column without horizontal overflow.
 - Do not add new JavaScript or network dependencies; this update is static HTML and CSS plus the current site behavior.
 

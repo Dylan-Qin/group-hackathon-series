@@ -1546,15 +1546,10 @@ body::after {
 }
 
 .award-card--popular {
-  flex-direction: row;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
   border-color: rgba(192, 174, 127, 0.55);
   background: rgba(192, 174, 127, 0.08);
 }
 
-.award-card__icon,
 .edition-detail__closed-icon {
   color: var(--gold);
   font-size: 1.5rem;
